@@ -1,0 +1,5 @@
+{
+  "name": "sophia",
+  "version": "0.0.0",
+  "main": "./lib/sophia.js"
+}
