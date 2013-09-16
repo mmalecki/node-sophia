@@ -1,0 +1,3 @@
+[submodule "deps/sophia"]
+	path = deps/sophia
+	url = https://github.com/pmwkaa/sophia.git
