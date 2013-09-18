@@ -8,8 +8,6 @@
 #define LD_METHOD_SETUP_COMMON(name, optionPos, callbackPos)                   \
   if (args.Length() == 0)                                                      \
     return NanThrowError(#name "() requires a callback argument");             \
-  leveldown::Database* database =                                              \
-    node::ObjectWrap::Unwrap<leveldown::Database>(args.This());                \
   v8::Local<v8::Object> optionsObj;                                            \
   v8::Local<v8::Function> callback;                                            \
   if (optionPos == -1 && args[callbackPos]->IsFunction()) {                    \
