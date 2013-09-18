@@ -5,6 +5,9 @@
       'dependencies': [
         '<(module_root_dir)/deps/sophia/sophia.gyp:sophia',
       ],
+      'include_dirs': [
+        "<!(node -p -e \"require('path').relative('.', require('path').dirname(require.resolve('nan')))\")",
+      ],
       'sources': ['src/sophia.cc', 'src/database_wrap.cc']
     }
   ]

@@ -1,4 +1,5 @@
 #include <node.h>
+#include <nan.h>
 #include <sophia.h>
 #include "database_wrap.h"
 
@@ -13,14 +14,14 @@ namespace sophia {
 
   void DatabaseWrap::Init(v8::Handle<v8::Object> exports) {
     Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
-    tpl->SetClassName(String::NewSymbol("DatabaseWrap"));
+    tpl->SetClassName(NanSymbol("DatabaseWrap"));
     tpl->InstanceTemplate()->SetInternalFieldCount(2);
     Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
-    exports->Set(String::NewSymbol("DatabaseWrap"), constructor);
+    exports->Set(NanSymbol("DatabaseWrap"), constructor);
   };
 
   Handle<Value> DatabaseWrap::New(const Arguments& args) {
-    HandleScope scope;
+    NanScope();
     DatabaseWrap* wrap = new DatabaseWrap();
 
     wrap->env = sp_env();
