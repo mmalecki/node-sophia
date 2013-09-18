@@ -20,7 +20,7 @@ namespace sophia {
     exports->Set(NanSymbol("DatabaseWrap"), constructor);
   };
 
-  Handle<Value> DatabaseWrap::New(const Arguments& args) {
+  NAN_METHOD(DatabaseWrap::New) {
     NanScope();
     DatabaseWrap* wrap = new DatabaseWrap();
 
