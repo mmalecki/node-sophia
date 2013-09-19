@@ -3,5 +3,8 @@ var path = require('path'),
     db = new sophia.DatabaseWrap(path.join(__dirname, 'tmp', 'db'));
 
 db.open({ createIfMissing: true }, function () {
-  console.dir(arguments);
+  console.log('opened');
+  db.put('hello', 'world', function () {
+    console.log('put');
+  });
 });
