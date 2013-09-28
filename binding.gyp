@@ -13,6 +13,7 @@
         'src/database_wrap.cc',
         'src/open_worker.cc',
         'src/set_worker.cc',
+        'src/get_worker.cc',
       ]
     }
   ]

@@ -20,6 +20,7 @@ namespace sophia {
       static v8::Handle<v8::Value> New(const v8::Arguments& args);
       static NAN_METHOD(Open);
       static NAN_METHOD(Put);
+      static NAN_METHOD(Get);
   };
 }
 

@@ -6,5 +6,9 @@ db.open({ createIfMissing: true }, function () {
   console.log('opened');
   db.put('hello', 'world', function () {
     console.log('put');
+    db.get('hello', function (err, val) {
+      if (err) throw err;
+      console.log(val.toString('utf8'));
+    });
   });
 });

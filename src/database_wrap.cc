@@ -4,6 +4,7 @@
 #include "database_wrap.h"
 #include "open_worker.h"
 #include "set_worker.h"
+#include "get_worker.h"
 #include "sophia.h"
 
 using namespace v8;
@@ -27,6 +28,10 @@ namespace sophia {
     tpl->PrototypeTemplate()->Set(
       NanSymbol("put"),
       FunctionTemplate::New(Put)->GetFunction()
+    );
+    tpl->PrototypeTemplate()->Set(
+      NanSymbol("get"),
+      FunctionTemplate::New(Get)->GetFunction()
     );
 
     Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
@@ -78,6 +83,22 @@ namespace sophia {
       strlen(key),
       value,
       strlen(value),
+      new NanCallback(callback)
+    );
+    NanReturnUndefined();
+  };
+
+  NAN_METHOD(DatabaseWrap::Get) {
+    NanScope();
+    DatabaseWrap* wrap = ObjectWrap::Unwrap<DatabaseWrap>(args.This());
+    LD_METHOD_SETUP_COMMON(get, 1, 2);
+
+    char* key = NanFromV8String(args[0]);
+
+    sophia::Get(
+      wrap->db,
+      key,
+      strlen(key),
       new NanCallback(callback)
     );
     NanReturnUndefined();
