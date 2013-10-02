@@ -1,14 +1,28 @@
 var path = require('path'),
-    sophia = require('../'),
-    db = new sophia.DatabaseWrap(path.join(__dirname, 'tmp', 'db'));
+    test = require('tap').test,
+    sophia = require('../');
 
-db.open({ createIfMissing: true }, function () {
-  console.log('opened');
-  db.put('hello', 'world', function () {
-    console.log('put');
-    db.get('hello', function (err, val) {
-      if (err) throw err;
-      console.log(val.toString('utf8'));
+test('sophia', function (t) {
+  var db = new sophia.DatabaseWrap(path.join(__dirname, 'tmp', 'db-0'));
+  db.open({ createIfMissing: true }, function () {
+    t.test('get/put', function (t) {
+      db.put('hello', 'world', function (err) {
+        t.ok(!err);
+
+        db.get('hello', function (err, val) {
+          t.ok(!err);
+          t.equal(val.toString('utf8'), 'world');
+          t.end();
+        });
+      });
+    });
+
+    t.test('no such key', function (t) {
+      db.get('404', function (err, val) {
+        t.ok(!err);
+        t.equal(val, null);
+        t.end();
+      });
     });
   });
 });
