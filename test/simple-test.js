@@ -12,7 +12,11 @@ test('sophia', function (t) {
         db.get('hello', function (err, val) {
           t.ok(!err);
           t.equal(val.toString('utf8'), 'world');
-          t.end();
+
+          db.del('hello', function (err) {
+            t.ok(!err);
+            t.end();
+          });
         });
       });
     });
