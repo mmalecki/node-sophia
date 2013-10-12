@@ -6,6 +6,7 @@
 #include "set_worker.h"
 #include "get_worker.h"
 #include "del_worker.h"
+#include "close_worker.h"
 #include "sophia.h"
 
 using namespace v8;
@@ -37,6 +38,10 @@ namespace sophia {
     tpl->PrototypeTemplate()->Set(
       NanSymbol("del"),
       FunctionTemplate::New(Del)->GetFunction()
+    );
+    tpl->PrototypeTemplate()->Set(
+      NanSymbol("close"),
+      FunctionTemplate::New(Close)->GetFunction()
     );
 
     Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
@@ -125,4 +130,17 @@ namespace sophia {
     );
     NanReturnUndefined();
   };
+
+  NAN_METHOD(DatabaseWrap::Close) {
+    NanScope();
+    v8::Local<v8::Function> callback = args[0].As<v8::Function>();
+    DatabaseWrap* wrap = ObjectWrap::Unwrap<DatabaseWrap>(args.This());
+
+    sophia::Close(
+      wrap,
+      new NanCallback(callback)
+    );
+    NanReturnUndefined();
+  };
+
 }

@@ -22,6 +22,7 @@ namespace sophia {
       static NAN_METHOD(Put);
       static NAN_METHOD(Get);
       static NAN_METHOD(Del);
+      static NAN_METHOD(Close);
   };
 }
 
