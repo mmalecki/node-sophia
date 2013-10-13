@@ -7,7 +7,8 @@
     "bindings": "1.1.x"
   },
   "devDependencies": {
-    "tap": "0.4.x"
+    "tap": "0.4.x",
+    "levelup": "0.16.x"
   },
   "scripts": {
     "test": "tap test/*-test.js"
