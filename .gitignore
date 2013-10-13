@@ -3,3 +3,5 @@ node_modules
 .DS_Store
 .*.sw[op]
 build
+test/tmp
+!test/tmp/.gitkeep
