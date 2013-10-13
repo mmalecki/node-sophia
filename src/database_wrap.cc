@@ -18,7 +18,7 @@ namespace sophia {
   DatabaseWrap::~DatabaseWrap() {
   };
 
-  void DatabaseWrap::Init(v8::Handle<v8::Object> exports) {
+  void DatabaseWrap::Init(Handle<Object> exports) {
     Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
     tpl->SetClassName(NanSymbol("DatabaseWrap"));
     tpl->InstanceTemplate()->SetInternalFieldCount(2);
@@ -133,7 +133,7 @@ namespace sophia {
 
   NAN_METHOD(DatabaseWrap::Close) {
     NanScope();
-    v8::Local<v8::Function> callback = args[0].As<v8::Function>();
+    Local<Function> callback = args[0].As<Function>();
     DatabaseWrap* wrap = ObjectWrap::Unwrap<DatabaseWrap>(args.This());
 
     sophia::Close(
