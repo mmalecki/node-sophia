@@ -1,9 +1,9 @@
 var path = require('path'),
     test = require('tap').test,
-    sophia = require('../');
+    Sophia = require('../');
 
 test('sophia', function (t) {
-  var db = new sophia.DatabaseWrap(path.join(__dirname, 'tmp', 'db-0'));
+  var db = new Sophia(path.join(__dirname, 'tmp', 'db-0'));
   db.open({ createIfMissing: true }, function () {
     t.test('get/put', function (t) {
       db.put('hello', 'world', function (err) {
