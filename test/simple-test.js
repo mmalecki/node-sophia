@@ -15,7 +15,12 @@ test('sophia', function (t) {
 
           db.del('hello', function (err) {
             t.ok(!err);
-            t.end();
+
+            db.get('hello', function (err, val) {
+              t.ok(!err);
+              t.equal(val, null);
+              t.end();
+            });
           });
         });
       });
