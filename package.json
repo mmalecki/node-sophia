@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "tap": "0.4.x"
+  },
+  "scripts": {
+    "test": "tap test/*-test.js"
   }
 }
