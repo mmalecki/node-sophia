@@ -11,6 +11,6 @@
     "levelup": "0.16.x"
   },
   "scripts": {
-    "test": "tap test/*-test.js"
+    "test": "rm -rf test/tmp/db-* && tap test/*-test.js"
   }
 }
