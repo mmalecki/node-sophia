@@ -33,5 +33,21 @@ test('sophia', function (t) {
         t.end();
       });
     });
+
+    t.test('require strings', function (t) {
+      db.put(1, 2, function (err) {
+        t.ok(err);
+        t.equal(err.message, 'Expecting a string');
+        db.get(3, function (err) {
+          t.ok(err);
+          t.equal(err.message, 'Expecting a string');
+          db.del(4, function (err) {
+            t.ok(err);
+            t.equal(err.message, 'Expecting a string');
+            t.end();
+          });
+        });
+      });
+    });
   });
 });
