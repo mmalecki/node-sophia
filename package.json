@@ -1,6 +1,6 @@
 {
   "name": "sophia",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./lib/sophia.js",
   "dependencies": {
     "nan": "0.4.x",
