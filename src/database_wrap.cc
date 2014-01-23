@@ -11,6 +11,17 @@
 
 using namespace v8;
 
+#define REQUIRE_STRING_ARG(ARG)                           \
+  if (!ARG->IsString()) {                                 \
+    Local<Value> argv[] = {                               \
+      Exception::Error(String::New("Expecting a string")) \
+    };                                                    \
+    NanCallback *cb = new NanCallback(callback);          \
+    cb->Call(1, argv);                                    \
+    delete cb;                                            \
+    NanReturnUndefined();                                 \
+  }
+
 namespace sophia {
   DatabaseWrap::DatabaseWrap() {
   };
@@ -84,7 +95,9 @@ namespace sophia {
     DatabaseWrap* wrap = ObjectWrap::Unwrap<DatabaseWrap>(args.This());
     LD_METHOD_SETUP_COMMON(put, 2, 3)
 
+    REQUIRE_STRING_ARG(args[0]);
     char* key = NanFromV8String(args[0]);
+    REQUIRE_STRING_ARG(args[1]);
     char* value = NanFromV8String(args[1]);
 
     sophia::Set(
@@ -103,6 +116,7 @@ namespace sophia {
     DatabaseWrap* wrap = ObjectWrap::Unwrap<DatabaseWrap>(args.This());
     LD_METHOD_SETUP_COMMON(get, 1, 2);
 
+    REQUIRE_STRING_ARG(args[0]);
     char* key = NanFromV8String(args[0]);
 
     sophia::Get(
@@ -120,6 +134,7 @@ namespace sophia {
     DatabaseWrap* wrap = ObjectWrap::Unwrap<DatabaseWrap>(args.This());
     LD_METHOD_SETUP_COMMON(get, 1, 2);
 
+    REQUIRE_STRING_ARG(args[0]);
     char* key = NanFromV8String(args[0]);
 
     sophia::Del(
